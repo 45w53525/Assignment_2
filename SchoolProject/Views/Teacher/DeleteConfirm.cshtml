@@ -1,4 +1,5 @@
-﻿@model SchoolProject.Models.Teacher
+﻿
+@model SchoolProject.Models.Teacher
 @{
     ViewBag.Title = "Show";
 }
@@ -8,11 +9,21 @@
 </div>
 <div id="containershow">
     <div>
-       <a href="/Teacher/Deleteconfirm/@Model.TeacherId">Delete this Teacher"</a>
+      
+        <h2> Are you Sure You want to Delete this Teacher </h2>
+
+
         <span class="name">@Model.TeacherFname @Model.TeacherLname @Model.TeacherId @Model.TeacherNumber </span>
     </div>
-    
-    
-   
+    <form method="post" action="/Teacher/Delete/@Model.TeacherId">
+        
+
+        <input type="submit" value="Delete"/>
+
+
+
+    </form>
+
+
 
 </div>

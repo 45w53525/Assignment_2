@@ -57,8 +57,14 @@ namespace SchoolProject.Controllers
                 int TeacherId = (int)ResultSet["teacherid"];
                 string TeacherFname = (string)ResultSet["teacherfname"];
                 string Teachelname = (string)ResultSet["teacherlname"];
-                string TeacherNumber = (string)ResultSet["employeenumber"];
-                decimal TeacherSalary = (decimal)ResultSet["salary"];
+                string TeacherNumber = "";
+
+
+                if (ResultSet["employeenumber"] != System.DBNull.Value)
+{
+                   TeacherNumber = (string)ResultSet["employeenumber"];
+                }
+                string TeacherEmail = (string)ResultSet["TeacherEmail"];
 
 
                 Teacher newTeacher = new Teacher();
@@ -66,7 +72,7 @@ namespace SchoolProject.Controllers
                 newTeacher.TeacherFname=TeacherFname;
                 newTeacher.TeacherLname = Teachelname;
                 newTeacher.TeacherNumber = TeacherNumber;
-                newTeacher.TeacherSalary = TeacherSalary.ToString();
+                newTeacher.TeacherEmail = TeacherEmail;
 
                 //Add the Teacher Name to the List
                 //Teachers.Add(NewTeacher);
@@ -103,8 +109,17 @@ namespace SchoolProject.Controllers
                 int TeacherId = (int)ResultSet["teacherid"];
                 string TeacherFname = (string)ResultSet["teacherfname"];
                 string Teachelname = (string)ResultSet["teacherlname"];
-                string TeacherNumber = (string)ResultSet["employeenumber"];
-                decimal TeacherSalary = (decimal)ResultSet["salary"];
+                string TeacherNumber = "";
+
+                
+                if (ResultSet["employeenumber"] != System.DBNull.Value)
+                {
+                    TeacherNumber = (string)ResultSet["employeenumber"];
+                }
+                
+
+
+                string TeacherEmail = (string)ResultSet["TeacherEmail"];
 
 
 
@@ -112,11 +127,71 @@ namespace SchoolProject.Controllers
                 newTeacher.TeacherFname = TeacherFname;
                 newTeacher.TeacherLname = Teachelname;
                 newTeacher.TeacherNumber = TeacherNumber;
-                newTeacher.TeacherSalary = TeacherSalary.ToString();
+                newTeacher.TeacherEmail = TeacherEmail;
             }
 
                 return newTeacher;
         }
+        public void addTeacher(Teacher NewTeacher)
+        {
+
+            //Create an instance of a connect.
+            MySqlConnection Conn = School.AccessDatabase();
+
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+
+          
+            string query = "insert into Teachers (Teacherfname,Teacherlname,Teacheremail,hiredate)  values (@Teacherfname,@Teacherlname,@Teacheremail,CURRENT_DATE())";
+
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("@Teacherfname",NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@Teacherlname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@Teacheremail", NewTeacher.TeacherEmail);
+            cmd.Prepare();
+
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+       
+        
+        }
+   
+        public void Deleteteacher(int teacherid) 
+        {
+
+
+            //Create an instance of a connect.
+            MySqlConnection Conn = School.AccessDatabase();
+
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+
+
+            string query = "delete from  teachers where teacherid=@id";
+
+            cmd.Parameters.AddWithValue("@id", teacherid);
+
+            cmd.CommandText = query;
+
+            cmd.Prepare ();
+
+            cmd.ExecuteNonQuery ();
+            Conn.Close();
+
+
+
+        }
+
+
+
 
     }
 }

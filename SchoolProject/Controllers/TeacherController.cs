@@ -26,11 +26,57 @@ namespace SchoolProject.Controllers
 
         public ActionResult Show(int id)
         {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher newTeacher = controller.FindTeacher(id);
+
+            return View(newTeacher);
+        }
+
+
+        public ActionResult Deleteconfirm(int id)
+        {
             TeacherDataController controller =new TeacherDataController();
             Teacher newTeacher = controller.FindTeacher(id);
            
             return View(newTeacher);
         }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+
+            controller.Deleteteacher(id);
+            return RedirectToAction("list");
+        }
+
+
+
+
+        public ActionResult New() { return View(); }
+
+        [HttpPost]
+        public ActionResult create(string Teacherfname, string Teacherlname, string Teacheremail)
+
+        {
+
+            Teacher NewTeacher=new Teacher();
+            NewTeacher.TeacherFname=Teacherfname;
+            NewTeacher.TeacherLname=Teacherlname;
+            NewTeacher.TeacherEmail=Teacheremail;
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.addTeacher(NewTeacher);
+
+
+            return RedirectToAction("list");
+           
+
+
+
+
+
+        }
 
     }
+   
 }

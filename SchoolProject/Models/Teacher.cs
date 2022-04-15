@@ -7,11 +7,11 @@ namespace SchoolProject.Models
 {
     public class Teacher
     {
-        public int TeacherId;
-        public string TeacherFname;
-        public string TeacherLname;
-        public string TeacherNumber;
-        public string TeacherSalary;
+        public int TeacherId { get; set; }
+        public string TeacherFname { get; set; }
+        public string TeacherLname { get; set; }
+        public string TeacherNumber { get; set; }
+        public string TeacherEmail { get; set; }
 
     }
 }

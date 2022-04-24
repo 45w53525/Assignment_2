@@ -11,9 +11,9 @@ namespace SchoolProject.Models
       
         private static string User { get { return "root"; } }
         private static string Password { get { return ""; } }
-        private static string Database { get { return "school"; } }
+        private static string Database { get { return "schooldb"; } }
         private static string Server { get { return "localhost"; } }
-        private static string Port { get { return "3306"; } }
+        private static string Port { get { return "3308"; } }
 
         protected static string ConnectionString
         {

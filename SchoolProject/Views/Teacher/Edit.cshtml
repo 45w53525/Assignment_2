@@ -1,0 +1,38 @@
+﻿@model SchoolProject.Models.Teacher
+
+
+
+
+@{
+
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Teacher</h2>
+
+<h2>New Teacher Interface !</h2>
+<form method="post" action="/Teacher/Update/@Model.TeacherId">
+    <div>
+        <label> First Name </label>
+        <input type="text" name="Teacherfname" value="@Model.TeacherFname"/>
+    </div>
+    <div>
+        <label> Last Name </label>
+        <input type="text" name="Teacherlname" value="@Model.TeacherLname"/>
+
+    </div>
+    <div>
+
+        <label> Email </label>
+        <input type="text" name="Teacheremail" value="@Model.TeacherEmail"/>
+
+    </div>
+    <div>
+
+        <input type="submit" value="Update Teacher" />
+
+    </div>
+
+
+
+</form>

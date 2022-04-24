@@ -59,23 +59,57 @@ namespace SchoolProject.Controllers
 
         {
 
-            Teacher NewTeacher=new Teacher();
-            NewTeacher.TeacherFname=Teacherfname;
-            NewTeacher.TeacherLname=Teacherlname;
-            NewTeacher.TeacherEmail=Teacheremail;
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFname = Teacherfname;
+            NewTeacher.TeacherLname = Teacherlname;
+            NewTeacher.TeacherEmail = Teacheremail;
 
             TeacherDataController controller = new TeacherDataController();
             controller.addTeacher(NewTeacher);
 
 
             return RedirectToAction("list");
-           
+        }  
+            ////////////Get /Teacher/Edit/{id}//////
+
+            public ActionResult edit(int id)
+            {
 
 
+            TeacherDataController controller = new TeacherDataController();
+            Teacher selectedTeacher = controller.FindTeacher(id);
+
+            
+
+            return View(selectedTeacher);
+            }
+
+        ////////post /Teacher/update/{id}
+        ///
+        [HttpPost]
+
+        public ActionResult Update(int id,string Teacherfname, string Teacherlname, string Teacheremail)
+
+        {
+         
+
+          Teacher Teacherinfo = new Teacher();
+
+            Teacherinfo.TeacherFname = Teacherfname;
+            Teacherinfo.TeacherLname=Teacherlname;
+            Teacherinfo.TeacherEmail=Teacheremail;
+
+            //////update Teacher Informaton//////////
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id, Teacherinfo);
 
 
-
+            return RedirectToAction("Show/"+ id);
         }
+
+
+        
 
     }
    
